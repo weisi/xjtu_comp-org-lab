@@ -1,0 +1,17 @@
+# Executables
+bin/
+
+# Temp files
+*~
+*.tmp
+*.swp
+
+# Binary files
+*.o
+*.cf
+
+# Wave files
+*.vcd
+
+# Generated files
+*.html
