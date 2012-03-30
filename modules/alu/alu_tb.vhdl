@@ -15,7 +15,6 @@ architecture behav of alu_tb is
       port (i0, i1  : in binary16; 
             op      : in std_logic_vector(3 downto 0); 
             clk     : in std_logic; 
-            
 
             result  : out binary16;
             exception: out std_logic
