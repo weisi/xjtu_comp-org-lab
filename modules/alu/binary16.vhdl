@@ -95,7 +95,7 @@ package body binary16 is
         return ieee.std_logic_unsigned."="(i0(14 downto 0),"000000000000000");
     end;
 
-    constant ieee754_binary16_zero: std_logic_vector(15 downto 0):=(others=>'0');
+    constant ieee754_binary16_zero: std_logic_vector:="0000000000000000";
 
     function ieee754_binary16_significand(
         -- get the significand, or fraction

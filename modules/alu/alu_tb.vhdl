@@ -1,3 +1,6 @@
+-- multiple1902 <multple1902@gmail.com>
+-- Released under GNU GPL v3, or later.
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
@@ -32,14 +35,26 @@ begin
    process
       type op_array is array (natural range <>) of std_logic_vector(3 downto 0);
       constant ops : op_array :=
-        ("0000", "0001", "0100", "0101", 
-         "1000", "1001", "1010", "1011");
+        ("0000", -- bitwise AND
+         "0001", --         OR
+         "0010", --         XOR
+         "0011", --         NOT (1st op)
+
+         "0100", -- addition on complements
+         "0101", -- minus
+         "0110", -- multiplication
+
+         "1000", -- logic shl
+         "1001", --       shr
+         "1010", -- arithmetic shl
+         "1011"  --            shr
+        );
    begin
       for i in ops'range loop
          i0 <= "1010010101011010";
          i1 <= "0101101010100101";
          op <= ops(i);
-         wait for 1 ms;
+         wait for 10 ms;
       end loop;
       assert false report "have a nice day!" severity note;
       wait;

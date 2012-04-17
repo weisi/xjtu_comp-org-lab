@@ -1,6 +1,3 @@
--- TODO
--- Need to add support for float point operations.
-
 library ieee;
 use ieee.std_logic_unsigned.all;
 --use ieee.std_logic_signed.all;
@@ -37,6 +34,7 @@ begin
     -- process(clk)
         variable i0t, i1t, ret: binary16;
         variable exp0, exp1: std_logic_vector(4 downto 0);
+        variable tmp_compl: std_logic_vector(31 downto 0);
             
     begin
         exception <= '0';
@@ -86,10 +84,10 @@ begin
                 -- multiplication on complements
                 i0t := not(i0)+2;
                 i1t := not(i1)+2;
-                ret := i0t*i1t;
+                tmp_compl := i0t*i1t;
+                ret := tmp_compl(15 downto 0);
                 result <= not(ret)+2;
                 exception <= '0';
-
 
             -- Shift 
 
@@ -112,29 +110,6 @@ begin
                 -- shift right arithmic
                 result <= to_stdlogicvector(to_bitvector(i0) sra 1);
                 exception <= '0';
-
-
-            -- Floating Points Arithmic, IEEE 754, binary 16
-
-                -- IEEE 754 binary 16 (half-precision binary floating-point format):
-                -- (15)             Sign bit : 1 (highest)
-                -- (14 downto 10)   Exponent width: 5, 2's complement where the sign bit is negative
-                -- (9 downto 0)     Significant precision: 11 (10 explicitly stored)
-
-            when "1100" =>
-                -- plus
-
-
-
-
-            when "1101" =>
-                -- minus
-
-            when "1110" =>
-                -- multiplication
-
-            when "1111" =>
-                -- division
 
             when others =>
         end case;

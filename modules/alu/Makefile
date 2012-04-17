@@ -1,5 +1,5 @@
 # multiple1902 <multiple1902@gmail.com>
-# All rights reserved.
+# Released under GNU GPL v3, or later.
 
 
 ELEMENT := alu.vhdl
@@ -31,15 +31,15 @@ alu_tb: analyze
 run: alu_tb
 	$(GHDL) -r $(TB)
 
-signal: alu_tb.vcd
+signal: $(WAVE)
 
 alu_tb.vcd: alu_tb
 	$(GHDL) -r $(TB) --vcd=$(WAVE)
 
-wave: alu_tb.vcd
+wave: $(WAVE)
 	dinotrace $(WAVE)
 
-gtkwave: alu_tb.vcd
+gtkwave: $(WAVE)
 	gtkwave $(WAVE)
 
 clean:
