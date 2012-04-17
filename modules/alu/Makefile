@@ -2,8 +2,8 @@
 # Released under GNU GPL v3, or later.
 
 
-ELEMENT := alu.vhdl
-BINARY16:= binary16.vhdl
+ELEMENT := alu
+BINARY16:= binary16
 TB		:= alu_tb
 WAVE	:= $(TB).vcd
 
@@ -12,28 +12,28 @@ IEEE	:= --ieee=synopsys
 
 all: analyze executable
 
-analyze: binary16.o alu.o alu_tb.o
+analyze: $(BINARY16).o $(ELEMENT).o $(TB).o
 	
-binary16.o:	binary16.vhdl
-	$(GHDL) -a -Wa,--32 $(IEEE) $(BINARY16)
+$(BINARY16).o:	$(BINARY16).vhdl
+	$(GHDL) -a -Wa,--32 $(IEEE) $(BINARY16).vhdl
 
-alu.o: alu.vhdl binary16.o
-	$(GHDL) -a -Wa,--32 $(IEEE) $(ELEMENT)
+$(ELEMENT).o: $(ELEMENT).vhdl $(BINARY16).o
+	$(GHDL) -a -Wa,--32 $(IEEE) $(ELEMENT).vhdl
 
-alu_tb.o: alu_tb.vhdl
+$(TB).o: $(TB).vhdl
 	$(GHDL) -a -Wa,--32 $(IEEE) $(TB).vhdl
 
-executable: alu_tb
+executable: $(TB)
 
-alu_tb: analyze
+$(TB): analyze
 	$(GHDL) -e -Wa,--32 $(IEEE) -Wl,-m32 $(TB)
 
-run: alu_tb
+run: (TB)
 	$(GHDL) -r $(TB)
 
 signal: $(WAVE)
 
-alu_tb.vcd: alu_tb
+$(WAVE): $(TB)
 	$(GHDL) -r $(TB) --vcd=$(WAVE)
 
 wave: $(WAVE)
