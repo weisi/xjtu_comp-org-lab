@@ -1,3 +1,6 @@
+-- multiple1902 <multple1902@gmail.com>
+-- Released under GNU GPL v3, or later.
+
 library ieee;
 use ieee.std_logic_unsigned.all;
 --use ieee.std_logic_signed.all;
