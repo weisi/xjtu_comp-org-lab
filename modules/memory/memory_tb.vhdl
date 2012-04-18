@@ -16,8 +16,8 @@ architecture behav of memory_tb is
 
             addr_h, addr_l  
                      : in  std_logic_vector(4 downto 0);
-            data_in  : in  std_logic_vector(7 downto 0);
-            data_out : out std_logic_vector(7 downto 0) -- no semicolon here!
+            data_in  : in  std_logic_vector(15 downto 0);
+            data_out : out std_logic_vector(15 downto 0) -- no semicolon here!
       );
    end component;
 
@@ -27,8 +27,8 @@ architecture behav of memory_tb is
    signal clk     : std_logic;
 
    signal addr_h, addr_l  : std_logic_vector(4 downto 0);
-   signal data_in  : std_logic_vector(7 downto 0);
-   signal data_out : std_logic_vector(7 downto 0);
+   signal data_in  : std_logic_vector(15 downto 0);
+   signal data_out : std_logic_vector(15 downto 0);
 begin
    memory_0: memory port map (
                              cs => cs,
@@ -49,17 +49,20 @@ begin
        clk<='0';
        addr_h<="00000";
        addr_l<="11111";
-       data_out<="01010110";
+       data_in<="0101011010100101";
        wait for 10 ms;
        clk<='1';
        wait for 10 ms;
 
        we<='0';
+       cs<='1';
        re<='1';
        clk<='0';
        addr_h<="00000";
        addr_l<="11111";
+       data_in<="ZZZZZZZZZZZZZZZZ";
        wait for 10 ms;
+       clk<='0';
        clk<='1';
        wait for 10 ms;
       assert false report "have a nice day!" severity note;
