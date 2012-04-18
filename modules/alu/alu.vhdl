@@ -90,7 +90,11 @@ begin
                 tmp_compl := i0t*i1t;
                 ret := tmp_compl(15 downto 0);
                 result <= not(ret)+2;
-                exception <= '0';
+                if ieee.std_logic_unsigned."="(tmp_compl(31 downto 16),"0000000000000000") then
+                    exception <= '0';
+                else
+                    exception <= '1';
+                end if;
 
             -- Shift 
 
