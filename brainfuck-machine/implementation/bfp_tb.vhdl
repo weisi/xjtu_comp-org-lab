@@ -307,10 +307,11 @@ begin
                     when 57=>
                         write(l, string'("9"));
                     when others =>
+                        write(l, string'(" "));
                 end case;
-                writeline(output, l);
             end if;
         end loop;
+        writeline(output, l);
 
         wait;
     end process;
